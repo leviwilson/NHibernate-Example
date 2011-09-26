@@ -10,7 +10,11 @@ Installation
 1. Make sure you have NuGet installed.
 2. Open up the Package Manager Console 'Tools --> Library Package Manager --> Package Manager Console'.
 3. Install the NuGet Power Tools 
+
 	PM> Install-Package NuGetPowerTools
+	
 4. Enable Package Restore
+
 	PM> Enable-PackageRestore
+	
 5. Build the solution.
