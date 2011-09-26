@@ -1,5 +1,7 @@
 using FluentNHibernate.Cfg;
 using NH.Data.Customers.Models.Mappings;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 
 namespace NH.Data.Customers.Config
 {
@@ -7,12 +9,12 @@ namespace NH.Data.Customers.Config
     {
         public string Dialect
         {
-            get { return "NHibernate.Dialect.SQLiteDialect"; }
+            get { return typeof(SQLiteDialect).AssemblyQualifiedName; }
         }
 
         public string ConnectionDriver
         {
-            get { return "NHibernate.Driver.SQLite20Driver"; }
+            get { return typeof(SQLite20Driver).AssemblyQualifiedName; }
         }
 
         public string ConnectionString
