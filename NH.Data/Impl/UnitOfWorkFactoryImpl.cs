@@ -9,7 +9,7 @@ namespace NH.Data.Impl
             _sessionFactoryContext = sessionFactoryContext;
         }
 
-        public UnitOfWork StartUnitOfWork<T>() where T : SessionConfiguration
+        public UnitOfWork StartUnitOfWork<T>() where T : SessionConfiguration, new()
         {
             var session = _sessionFactoryContext.Get<T>()
                 .OpenSession();

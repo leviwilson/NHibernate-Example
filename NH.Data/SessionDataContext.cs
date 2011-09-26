@@ -11,18 +11,12 @@ namespace NH.Data
 
         private static Dictionary<Type, ISession> Sessions
         {
-            get
-            {
-                if( null == _sessions)
-                    _sessions = new Dictionary<Type, ISession>();
-
-                return _sessions;
-            }
+            get { return _sessions ?? (_sessions = new Dictionary<Type, ISession>()); }
         }
 
         public static ISession Get<T>() where T : SessionConfiguration
         {
-            ISession session = null;
+            ISession session;
             Sessions.TryGetValue(typeof (T), out session);
             return session;
         }
@@ -30,6 +24,11 @@ namespace NH.Data
         public static void Set<T>(ISession session)
         {
             Sessions[typeof(T)] = session;
+        }
+
+        public static void Reset()
+        {
+            Sessions.Clear();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace NH.Data.Impl
 {
     public class PersistenceBrokerImpl<TConfig> : PersistenceBroker<TConfig> where TConfig : SessionConfiguration
     {
-        private ISession Session
+        private static ISession Session
         {
             get { return SessionDataContext.Get<TConfig>(); }
         }

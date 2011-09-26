@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
-using Ninject;
 using Environment = NHibernate.Cfg.Environment;
 
 namespace NH.Data
@@ -15,22 +14,16 @@ namespace NH.Data
 
         private static Dictionary<Type, ISessionFactory> SessionFactories
         {
-            get
-            {
-                if (null == _sessionFactories)
-                    _sessionFactories = new Dictionary<Type, ISessionFactory>();
-                return _sessionFactories;
-            }
+            get { return _sessionFactories ?? (_sessionFactories = new Dictionary<Type, ISessionFactory>()); }
         }
 
-        public ISessionFactory Get<T>() where T : SessionConfiguration
+        public ISessionFactory Get<T>() where T : SessionConfiguration, new()
         {
             var configurationType = typeof(T);
             if (SessionFactories.ContainsKey(configurationType))
                 return SessionFactories[configurationType];
 
-            var kernel = new StandardKernel();
-            var configSettings = kernel.Get<T>();
+            var configSettings = new T();
 
             var config = new Configuration();
             config.SetProperty(Environment.Dialect, configSettings.Dialect);
