@@ -8,10 +8,12 @@ namespace NH.Data.Config
         public override void Load()
         {
             Bind<UnitOfWorkFactory>()
-                .To<UnitOfWorkFactoryImpl>();
+                .To<UnitOfWorkFactoryImpl>()
+                .InSingletonScope();
 
             Bind(typeof(PersistenceBroker<>))
-                .To(typeof(PersistenceBrokerImpl<>));
+                .To(typeof(PersistenceBrokerImpl<>))
+                .InSingletonScope();
         }
     }
 }

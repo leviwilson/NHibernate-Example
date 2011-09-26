@@ -9,7 +9,8 @@ namespace NH.Data.Customers.Config
         public override void Load()
         {
             Bind<CustomerRepository>()
-                .To<CustomerRepositoryImpl>();
+                .To<CustomerRepositoryImpl>()
+                .InSingletonScope();
         }
     }
 }
