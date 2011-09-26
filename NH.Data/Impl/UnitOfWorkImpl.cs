@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using NHibernate;
 
@@ -7,6 +8,7 @@ namespace NH.Data.Impl
     {
         private readonly ISession _session;
         private ITransaction _currentTransaction;
+        private bool _isDisposed;
 
         public UnitOfWorkImpl(ISession session)
         {
@@ -50,7 +52,16 @@ namespace NH.Data.Impl
 
         public void Dispose()
         {
+            Dispose(true);
+        }
+
+        private void Dispose(bool doDispose)
+        {
+            if (_isDisposed || !doDispose) return;
+
             _session.Dispose();
+            GC.SuppressFinalize(this);
+            _isDisposed = true;
         }
     }
 }

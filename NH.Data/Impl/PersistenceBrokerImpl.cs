@@ -26,6 +26,11 @@ namespace NH.Data.Impl
             return Session.Query<T>();
         }
 
+        public IQuery GetNamedQuery(string queryName)
+        {
+            return Session.GetNamedQuery(queryName);
+        }
+
         public void Delete(object model)
         {
             Session.Delete(model);

@@ -1,4 +1,5 @@
 using System.Linq;
+using NHibernate;
 
 namespace NH.Data
 {
@@ -9,6 +10,7 @@ namespace NH.Data
         object Create(object model);
         T Get<T>(object id);
         IQueryable<T> Query<T>();
+        IQuery GetNamedQuery(string queryName);
         void Delete(object model);
     }
 }
