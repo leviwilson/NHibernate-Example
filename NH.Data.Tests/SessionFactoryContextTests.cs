@@ -16,6 +16,12 @@ namespace NH.Data.Tests
             _sessionFactoryContext = new SessionFactoryContext();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _sessionFactoryContext.Dispose();
+        }
+
         [Test]
         public void Then_session_factories_are_only_initialized_once()
         {

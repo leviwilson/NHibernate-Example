@@ -19,6 +19,11 @@ namespace NH.Data
 
         public ISessionFactory Get<T>() where T : SessionConfiguration, new()
         {
+            return Get<T>(x => {});
+        }
+
+        public ISessionFactory Get<T>(Action<Configuration> configurationAction) where T : SessionConfiguration, new()
+        {
             var configurationType = typeof(T);
             if (SessionFactories.ContainsKey(configurationType))
                 return SessionFactories[configurationType];
@@ -32,6 +37,7 @@ namespace NH.Data
 
             var sessionFactory = Fluently.Configure(config)
                 .Mappings(configSettings.ConfigureMappings)
+                .ExposeConfiguration(configurationAction)
                 .BuildSessionFactory();
 
             SessionFactories.Add(configurationType, sessionFactory);
@@ -43,6 +49,7 @@ namespace NH.Data
         {
             foreach(var sessionFactory in SessionFactories)
                 sessionFactory.Value.Dispose();
+            SessionFactories.Clear();
         }
     }
 }

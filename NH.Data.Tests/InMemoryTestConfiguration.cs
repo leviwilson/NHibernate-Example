@@ -39,11 +39,9 @@ namespace NH.Data.Tests
 
     internal class ArtistMap : ClassMap<Artist>
     {
-        public static string TableCreate = "create table artists (id integer primary key, artistname varchar(100))";
-
         public ArtistMap()
         {
-            Table("Artist");
+            Table("Artists");
 
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.ArtistName);
