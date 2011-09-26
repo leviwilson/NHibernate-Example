@@ -6,22 +6,21 @@ namespace NH.Data.Tests
     {
         public string Dialect
         {
-            get { throw new System.NotImplementedException(); }
+            get { return "NHibernate.Dialect.SQLiteDialect"; }
         }
 
         public string ConnectionDriver
         {
-            get { throw new System.NotImplementedException(); }
+            get { return "NHibernate.Driver.SQLite20Driver"; }
         }
 
         public string ConnectionString
         {
-            get { throw new System.NotImplementedException(); }
+            get { return "Data Source=:memory:;Version=3;New=True;"; }
         }
 
         public void ConfigureMappings(MappingConfiguration mappingConfiguration)
         {
-            throw new System.NotImplementedException();
         }
     }
 
