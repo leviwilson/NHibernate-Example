@@ -2,7 +2,7 @@ using FluentNHibernate.Mapping;
 
 namespace NH.Data.Customers.Models.Mappings
 {
-    public class CustomerMap : ClassMap<Customer>
+    public sealed class CustomerMap : ClassMap<Customer>
     {
         public CustomerMap()
         {

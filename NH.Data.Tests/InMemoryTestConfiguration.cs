@@ -39,7 +39,7 @@ namespace NH.Data.Tests
         public virtual string ArtistName { get; set; }
     }
 
-    internal class ArtistMap : ClassMap<Artist>
+    internal sealed class ArtistMap : ClassMap<Artist>
     {
         public ArtistMap()
         {

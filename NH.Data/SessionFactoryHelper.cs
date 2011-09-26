@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
-using Environment = NHibernate.Cfg.Environment;
 
 namespace NH.Data
 {
