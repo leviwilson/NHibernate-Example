@@ -28,15 +28,8 @@ namespace NH.Data
             if (SessionFactories.ContainsKey(configurationType))
                 return SessionFactories[configurationType];
 
-            var configSettings = new T();
-
-            var config = new Configuration();
-            config.SetProperty(Environment.Dialect, configSettings.Dialect);
-            config.SetProperty(Environment.ConnectionDriver, configSettings.ConnectionDriver);
-            config.SetProperty(Environment.ConnectionString, configSettings.ConnectionString);
-
-            var sessionFactory = Fluently.Configure(config)
-                .Mappings(configSettings.ConfigureMappings)
+            var sessionFactory = Fluently.Configure(new T().ToConfiguration())
+                .Mappings(new T().ConfigureMappings)
                 .ExposeConfiguration(configurationAction)
                 .BuildSessionFactory();
 
