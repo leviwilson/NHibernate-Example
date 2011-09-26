@@ -28,8 +28,9 @@ namespace NH.Data
             if (SessionFactories.ContainsKey(configurationType))
                 return SessionFactories[configurationType];
 
-            var sessionFactory = Fluently.Configure(new T().ToConfiguration())
-                .Mappings(new T().ConfigureMappings)
+            var sessionConfiguration = new T();
+            var sessionFactory = Fluently.Configure(sessionConfiguration.ToConfiguration())
+                .Mappings(sessionConfiguration.ConfigureMappings)
                 .ExposeConfiguration(configurationAction)
                 .BuildSessionFactory();
 
