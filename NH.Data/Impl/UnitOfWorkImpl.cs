@@ -50,9 +50,6 @@ namespace NH.Data.Impl
 
         public void Dispose()
         {
-            if( null != _currentTransaction)
-                _currentTransaction.Dispose();
-
             _session.Dispose();
         }
     }

@@ -7,7 +7,7 @@ using Environment = NHibernate.Cfg.Environment;
 
 namespace NH.Data
 {
-    public class SessionFactoryContext
+    public class SessionFactoryContext : IDisposable
     {
         [ThreadStatic]
         private static Dictionary<Type, ISessionFactory> _sessionFactories;
@@ -37,6 +37,12 @@ namespace NH.Data
             SessionFactories.Add(configurationType, sessionFactory);
 
             return sessionFactory;
+        }
+
+        public void Dispose()
+        {
+            foreach(var sessionFactory in SessionFactories)
+                sessionFactory.Value.Dispose();
         }
     }
 }

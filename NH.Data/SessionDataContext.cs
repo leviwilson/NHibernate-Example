@@ -28,6 +28,8 @@ namespace NH.Data
 
         public static void Reset()
         {
+            foreach(var session in Sessions)
+                session.Value.Dispose();
             Sessions.Clear();
         }
     }

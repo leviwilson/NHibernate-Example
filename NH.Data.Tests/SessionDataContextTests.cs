@@ -18,7 +18,7 @@ namespace NH.Data.Tests
         [Test]
         public void Then_null_is_returned_if_a_session_has_not_been_set()
         {
-            var session = SessionDataContext.Get<TestConfiguration>();
+            var session = SessionDataContext.Get<InMemoryTestConfiguration>();
             session.Should().Be.Null();
         }
 
@@ -27,9 +27,9 @@ namespace NH.Data.Tests
         {
             var expectedSession = MockRepository.GenerateMock<ISession>();
 
-            SessionDataContext.Set<TestConfiguration>(expectedSession);
+            SessionDataContext.Set<InMemoryTestConfiguration>(expectedSession);
 
-            var actualSession = SessionDataContext.Get<TestConfiguration>();
+            var actualSession = SessionDataContext.Get<InMemoryTestConfiguration>();
             actualSession.Should().Equal(expectedSession);
         }
 
@@ -39,13 +39,13 @@ namespace NH.Data.Tests
             var sessionOne = MockRepository.GenerateMock<ISession>();
             var sessionTwo = MockRepository.GenerateMock<ISession>();
 
-            SessionDataContext.Set<TestConfiguration>(sessionOne);
-            SessionDataContext.Set<TestTwoConfiguration>(sessionTwo);
+            SessionDataContext.Set<InMemoryTestConfiguration>(sessionOne);
+            SessionDataContext.Set<InMemoryTestTwoConfiguration>(sessionTwo);
 
-            SessionDataContext.Get<TestConfiguration>()
+            SessionDataContext.Get<InMemoryTestConfiguration>()
                 .Should().Equal(sessionOne);
 
-            SessionDataContext.Get<TestTwoConfiguration>()
+            SessionDataContext.Get<InMemoryTestTwoConfiguration>()
                 .Should().Equal(sessionTwo);
         }
 
@@ -54,15 +54,15 @@ namespace NH.Data.Tests
         {
             var threadOneSession = MockRepository.GenerateMock<ISession>();
 
-            SessionDataContext.Set<TestConfiguration>(threadOneSession);
+            SessionDataContext.Set<InMemoryTestConfiguration>(threadOneSession);
 
             ISession threadTwoSession = null;
 
-            var threadTwo = new Thread(() => threadTwoSession = SessionDataContext.Get<TestConfiguration>());
+            var threadTwo = new Thread(() => threadTwoSession = SessionDataContext.Get<InMemoryTestConfiguration>());
             threadTwo.Start();
             threadTwo.Join();
 
-            SessionDataContext.Get<TestConfiguration>()
+            SessionDataContext.Get<InMemoryTestConfiguration>()
                 .Should().Equal(threadOneSession);
 
             threadTwoSession.Should().Be.Null();
