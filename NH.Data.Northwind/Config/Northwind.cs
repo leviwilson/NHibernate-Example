@@ -1,25 +1,25 @@
-using FluentNHibernate.Cfg;
-using NH.Data.Customers.Models.Mappings;
+﻿using FluentNHibernate.Cfg;
+using NH.Data.Northwind.Models.Mappings;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 
-namespace NH.Data.Customers.Config
+namespace NH.Data.Northwind.Config
 {
-    public class CustomersConfiguration : SessionConfiguration
+    public class Northwind : SessionConfiguration
     {
         public string Dialect
         {
-            get { return typeof(SQLiteDialect).AssemblyQualifiedName; }
+            get { return typeof(MsSqlCe40Dialect).AssemblyQualifiedName; }
         }
 
         public string ConnectionDriver
         {
-            get { return typeof(SQLite20Driver).AssemblyQualifiedName; }
+            get { return typeof(SqlServerCeDriver).AssemblyQualifiedName; }
         }
 
         public string ConnectionString
         {
-            get { return "Data Source=customers.db;Version=3;"; }
+            get { return "Data Source=Northwind.sdf"; }
         }
 
         public void ConfigureMappings(MappingConfiguration mappingConfiguration)

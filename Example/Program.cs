@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using NH.Data.Northwind.Config;
+using NH.Data.Northwind.Repositories;
 using Ninject;
 using NH.Data;
 using NH.Data.Config;
@@ -11,21 +14,33 @@ namespace Example
     {
         static void Main()
         {
-            var kernel = new StandardKernel(new NhDataModule(), new CustomerModule());
+            var kernel = new StandardKernel(new NhDataModule(), new RestaurantModule(), new NorthwindModule());
 
-            using (kernel.Get<UnitOfWorkFactory>().StartUnitOfWork<CustomersConfiguration>())
+            var unitOfWorkFactory = kernel.Get<UnitOfWorkFactory>();
+
+            using (unitOfWorkFactory.StartUnitOfWork<RestaurantConfiguration>())
+            using (unitOfWorkFactory.StartUnitOfWork<Northwind>())
             {
-                var customerRepository = kernel.Get<CustomerRepository>();
-
-                var customer = customerRepository.FindById(1);
-
-                if( null == customer)
-                    Console.WriteLine("Customer not found.");
-                else
-                {
-                    Console.WriteLine("Found customer {0}!", customer.CustomerName);
-                }
+                FindARestaurant(kernel);
+                FindSomeCustomers(kernel);
             }
+        }
+
+        private static void FindARestaurant(StandardKernel kernel)
+        {
+            var restaurant = kernel.Get<RestaurantRepository>()
+                .FindById(1);
+
+            if (null == restaurant)
+                Console.WriteLine("Restaurant not found.\n");
+            else
+                Console.WriteLine("Found customer {0}!\n", restaurant.RestaurantName);
+        }
+
+        private static void FindSomeCustomers(StandardKernel kernel)
+        {
+            foreach (var customer in kernel.Get<CustomerRepository>().FindFirst(25))
+                Console.WriteLine("{0,-40}{1,-15}", customer.CompanyName, customer.City);
         }
     }
 }

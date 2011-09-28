@@ -7,7 +7,6 @@ namespace NH.Data.Impl
     public class UnitOfWorkImpl : UnitOfWork
     {
         private readonly ISession _session;
-        private ITransaction _currentTransaction;
         private bool _isDisposed;
 
         public UnitOfWorkImpl(ISession session)
@@ -17,17 +16,19 @@ namespace NH.Data.Impl
 
         public void BeginTransaction(IsolationLevel isolationLevel)
         {
-            _currentTransaction = _session.BeginTransaction(isolationLevel);
+            _session.BeginTransaction(isolationLevel);
         }
 
         public void Commit()
         {
-            _currentTransaction.Commit();
+            if (_session.Transaction.IsActive)
+                _session.Transaction.Commit();
         }
 
         public void Rollback()
         {
-            _currentTransaction.Rollback();
+            if ( _session.Transaction.IsActive)
+                _session.Transaction.Rollback();
         }
 
         public void Flush()
@@ -58,6 +59,8 @@ namespace NH.Data.Impl
         private void Dispose(bool doDispose)
         {
             if (_isDisposed || !doDispose) return;
+
+            Rollback();
 
             _session.Dispose();
             GC.SuppressFinalize(this);

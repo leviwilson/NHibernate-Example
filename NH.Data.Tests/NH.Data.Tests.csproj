@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InMemorySQLiteTestBase.cs" />
     <Compile Include="SessionDataContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionFactoryContextTests.cs" />
@@ -115,9 +116,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NH.Data.Customers\NH.Data.Customers.csproj">
+    <ProjectReference Include="..\NH.Data.Restaurants\NH.Data.Restaurants.csproj">
       <Project>{CCC017D4-5B95-415D-ABF8-574D78B7BD45}</Project>
-      <Name>NH.Data.Customers</Name>
+      <Name>NH.Data.Restaurants</Name>
     </ProjectReference>
     <ProjectReference Include="..\NH.Data\NH.Data.csproj">
       <Project>{B24F6ED5-75DC-4FED-97D4-10FA9DD5B95D}</Project>

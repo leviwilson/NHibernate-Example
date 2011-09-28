@@ -1,3 +1,4 @@
+using System.Data;
 using System.Linq;
 using NHibernate;
 
@@ -12,5 +13,8 @@ namespace NH.Data
         IQueryable<T> Query<T>();
         IQuery GetNamedQuery(string queryName);
         void Delete(object model);
+        ISQLQuery CreateSqlQuery(string queryString);
+        IQuery CreateHqlQuery(string queryString);
+        IDbCommand CreateDbCommand();
     }
 }

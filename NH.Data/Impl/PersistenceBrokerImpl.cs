@@ -1,3 +1,4 @@
+using System.Data;
 using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
@@ -34,6 +35,27 @@ namespace NH.Data.Impl
         public void Delete(object model)
         {
             Session.Delete(model);
+        }
+
+        public ISQLQuery CreateSqlQuery(string queryString)
+        {
+            return Session.CreateSQLQuery(queryString);
+        }
+
+        public IQuery CreateHqlQuery(string queryString)
+        {
+            return Session.CreateQuery(queryString);
+        }
+
+        public IDbCommand CreateDbCommand()
+        {
+            var dbCommand = Session.Connection.CreateCommand();
+            dbCommand.CommandTimeout = 600;
+
+            if( null != Session.Transaction )
+                Session.Transaction.Enlist(dbCommand);
+
+            return dbCommand;
         }
     }
 }

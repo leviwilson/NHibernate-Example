@@ -2,8 +2,8 @@
 
 namespace NH.Data.Customers.Repositories
 {
-    public interface CustomerRepository
+    public interface RestaurantRepository
     {
-        Customer FindById(int id);
+        Restaurant FindById(int id);
     }
 }
