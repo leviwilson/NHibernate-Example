@@ -1,4 +1,4 @@
-NHibernate Exampls
+NHibernate Example
 =============
 
 This NHibernate example is to illustrate how to use a UnitOfWork pattern for NHibernate as well as to simplify the database setup to be
