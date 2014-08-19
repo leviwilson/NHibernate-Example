@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F926BB
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{A614484A-9DC0-49C3-80BD-A28F6A7699DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,5 +83,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9405881-9DDF-496B-9A44-FDE8DDB655AC} = {A614484A-9DC0-49C3-80BD-A28F6A7699DD}
+		{CCC017D4-5B95-415D-ABF8-574D78B7BD45} = {A614484A-9DC0-49C3-80BD-A28F6A7699DD}
 	EndGlobalSection
 EndGlobal
