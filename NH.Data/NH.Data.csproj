@@ -61,9 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\NHDataModule.cs" />
+    <Compile Include="Extensions\FutureQueryableExtensions.cs" />
     <Compile Include="Impl\PersistenceBrokerImpl.cs" />
     <Compile Include="Impl\UnitOfWorkFactoryImpl.cs" />
     <Compile Include="Impl\UnitOfWorkImpl.cs" />
+    <Compile Include="Linq\FutureQueryable.cs" />
     <Compile Include="PersistenceBroker.cs" />
     <Compile Include="SessionConfiguration.cs" />
     <Compile Include="SessionDataContext.cs" />

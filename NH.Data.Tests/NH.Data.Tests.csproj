@@ -107,11 +107,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtistConfiguration.cs" />
     <Compile Include="InMemorySQLiteTestBase.cs" />
+    <Compile Include="InMemoryTestTwoConfiguration.cs" />
     <Compile Include="SessionDataContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionFactoryContextTests.cs" />
     <Compile Include="InMemoryTestConfiguration.cs" />
+    <Compile Include="TestModels\Artist.cs" />
+    <Compile Include="TestModels\Mappings\ArtistMap.cs" />
     <Compile Include="UnitOfWorkTests.cs" />
   </ItemGroup>
   <ItemGroup>

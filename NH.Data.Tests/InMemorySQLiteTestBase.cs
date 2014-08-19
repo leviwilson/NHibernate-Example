@@ -21,7 +21,7 @@ namespace NH.Data.Tests
         public void SetUp()
         {
             _sessionFactoryContext = new SessionFactoryContext();
-            _sessionFactory = _sessionFactoryContext.Get<InMemoryTestConfiguration>(SetupInMemoryConfiguration());
+            _sessionFactory = _sessionFactoryContext.Get<ArtistConfiguration>(SetupInMemoryConfiguration());
 
             _session = _sessionFactory.OpenSession();
 

@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Linq;
+using NH.Data.Tests.TestModels;
 using NHibernate.Linq;
 using NUnit.Framework;
 using Should.Fluent;

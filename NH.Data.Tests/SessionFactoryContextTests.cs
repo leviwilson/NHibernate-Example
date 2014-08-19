@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using NHibernate;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Should.Fluent;
 
 namespace NH.Data.Tests
@@ -25,27 +23,24 @@ namespace NH.Data.Tests
         [Test]
         public void Then_session_factories_are_only_initialized_once()
         {
-            var expectedSessionFactory = _sessionFactoryContext.Get<InMemoryTestConfiguration>();
+            var expectedSessionFactory = _sessionFactoryContext.Get<ArtistConfiguration>();
             
             expectedSessionFactory
                 .Should().Not.Be.Null();
 
-            _sessionFactoryContext.Get<InMemoryTestConfiguration>()
+            _sessionFactoryContext.Get<ArtistConfiguration>()
                 .Should().Equal(expectedSessionFactory);
         }
 
+
         [Test]
-        public void Then_session_factories_will_be_different_across_threads()
+        public void Then_session_factories_can_be_aliased()
         {
-            var threadOneSessionFactory = _sessionFactoryContext.Get<InMemoryTestConfiguration>();
+            _sessionFactoryContext.Alias<ArtistConfiguration, InMemoryTestConfiguration<ArtistConfiguration>>();
 
-            ISessionFactory threadTwoSessionFactory = null;
-            var threadTwo = new Thread(() => threadTwoSessionFactory = _sessionFactoryContext.Get<InMemoryTestConfiguration>());
-            threadTwo.Start();
-            threadTwo.Join();
-
-            threadTwoSessionFactory
-                .Should().Not.Equal(threadOneSessionFactory);
+            _sessionFactoryContext.Get<ArtistConfiguration>().Should()
+                .Be.SameAs(_sessionFactoryContext.Get<InMemoryTestConfiguration<ArtistConfiguration>>());
         }
+
     }
 }

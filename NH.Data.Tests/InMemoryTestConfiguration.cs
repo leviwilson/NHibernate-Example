@@ -1,12 +1,18 @@
 using FluentNHibernate.Cfg;
-using FluentNHibernate.Mapping;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 
 namespace NH.Data.Tests
 {
-    public class InMemoryTestConfiguration : SessionConfiguration
+    public class InMemoryTestConfiguration<TConfig> : SessionConfiguration where TConfig : SessionConfiguration, new()
     {
+        private readonly TConfig _wrappedConfig;
+
+        public InMemoryTestConfiguration()
+        {
+            _wrappedConfig = new TConfig();
+        }
+
         public string Dialect
         {
             get { return typeof(SQLiteDialect).AssemblyQualifiedName; }
@@ -24,29 +30,7 @@ namespace NH.Data.Tests
 
         public void ConfigureMappings(MappingConfiguration mappingConfiguration)
         {
-            mappingConfiguration.FluentMappings
-                .Add<ArtistMap>();
-        }
-    }
-
-    class InMemoryTestTwoConfiguration : InMemoryTestConfiguration
-    {
-    }
-
-    internal class Artist
-    {
-        public virtual int Id { get; set; }
-        public virtual string ArtistName { get; set; }
-    }
-
-    internal sealed class ArtistMap : ClassMap<Artist>
-    {
-        public ArtistMap()
-        {
-            Table("Artists");
-
-            Id(x => x.Id).GeneratedBy.Identity();
-            Map(x => x.ArtistName);
+            _wrappedConfig.ConfigureMappings(mappingConfiguration);
         }
     }
 }

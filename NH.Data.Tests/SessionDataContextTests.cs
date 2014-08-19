@@ -18,7 +18,7 @@ namespace NH.Data.Tests
         [Test]
         public void Then_null_is_returned_if_a_session_has_not_been_set()
         {
-            var session = SessionDataContext.Get<InMemoryTestConfiguration>();
+            var session = SessionDataContext.Get<ArtistConfiguration>();
             session.Should().Be.Null();
         }
 
@@ -27,9 +27,9 @@ namespace NH.Data.Tests
         {
             var expectedSession = MockRepository.GenerateMock<ISession>();
 
-            SessionDataContext.Set<InMemoryTestConfiguration>(expectedSession);
+            SessionDataContext.Set<ArtistConfiguration>(expectedSession);
 
-            var actualSession = SessionDataContext.Get<InMemoryTestConfiguration>();
+            var actualSession = SessionDataContext.Get<ArtistConfiguration>();
             actualSession.Should().Equal(expectedSession);
         }
 
@@ -39,10 +39,10 @@ namespace NH.Data.Tests
             var sessionOne = MockRepository.GenerateMock<ISession>();
             var sessionTwo = MockRepository.GenerateMock<ISession>();
 
-            SessionDataContext.Set<InMemoryTestConfiguration>(sessionOne);
+            SessionDataContext.Set<ArtistConfiguration>(sessionOne);
             SessionDataContext.Set<InMemoryTestTwoConfiguration>(sessionTwo);
 
-            SessionDataContext.Get<InMemoryTestConfiguration>()
+            SessionDataContext.Get<ArtistConfiguration>()
                 .Should().Equal(sessionOne);
 
             SessionDataContext.Get<InMemoryTestTwoConfiguration>()
@@ -54,15 +54,15 @@ namespace NH.Data.Tests
         {
             var threadOneSession = MockRepository.GenerateMock<ISession>();
 
-            SessionDataContext.Set<InMemoryTestConfiguration>(threadOneSession);
+            SessionDataContext.Set<ArtistConfiguration>(threadOneSession);
 
             ISession threadTwoSession = null;
 
-            var threadTwo = new Thread(() => threadTwoSession = SessionDataContext.Get<InMemoryTestConfiguration>());
+            var threadTwo = new Thread(() => threadTwoSession = SessionDataContext.Get<ArtistConfiguration>());
             threadTwo.Start();
             threadTwo.Join();
 
-            SessionDataContext.Get<InMemoryTestConfiguration>()
+            SessionDataContext.Get<ArtistConfiguration>()
                 .Should().Equal(threadOneSession);
 
             threadTwoSession.Should().Be.Null();
