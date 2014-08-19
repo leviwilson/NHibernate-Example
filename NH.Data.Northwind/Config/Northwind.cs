@@ -17,9 +17,12 @@ namespace NH.Data.Northwind.Config
             get { return typeof(SqlServerCeDriver).AssemblyQualifiedName; }
         }
 
+
+        public static string _connectionString;
         public string ConnectionString
         {
-            get { return "Data Source=Northwind.sdf"; }
+            get { return _connectionString ?? "Data Source=Northwind.sdf"; }
+            set { _connectionString = value; }
         }
 
         public void ConfigureMappings(MappingConfiguration mappingConfiguration)

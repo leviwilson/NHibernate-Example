@@ -14,7 +14,8 @@ namespace NH.Data.Impl
 
         public object Create(object model)
         {
-            return Session.Save(model);
+            Session.Save(model);
+            return model;
         }
 
         public T Get<T>(object id)

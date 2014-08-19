@@ -5,6 +5,6 @@ namespace NH.Data.Northwind.Repositories
 {
     public interface CustomerRepository
     {
-        IList<Customer> FindFirst(int n);
+        IList<Customer> FindFirst(int howMany);
     }
 }

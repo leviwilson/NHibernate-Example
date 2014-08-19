@@ -14,10 +14,10 @@ namespace NH.Data.Northwind.Repositories.Impl
         }
 
 
-        public IList<Customer> FindFirst(int n)
+        public IList<Customer> FindFirst(int howMany)
         {
             return _persistenceBroker.Query<Customer>()
-                .Take(25).ToList();
+                .Take(howMany).ToList();
         }
     }
 }
